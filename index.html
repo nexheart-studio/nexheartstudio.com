@@ -1,67 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexHeart Studio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexHeart Studio</title>
+  <meta name="description" content="NexHeart Studio creates fun, polished and memorable mobile games." />
 
-    <style>
-        body{
-            margin:0;
-            background:#0f172a;
-            color:white;
-            font-family:Arial, sans-serif;
-            text-align:center;
-        }
+  <style>
+    :root {
+      --bg: #070b18;
+      --panel: rgba(18, 28, 52, 0.78);
+      --panel-strong: rgba(26, 39, 72, 0.95);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --cyan: #22d3ee;
+      --blue: #3b82f6;
+      --pink: #ec4899;
+      --border: rgba(148, 163, 184, 0.18);
+      --shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+    }
 
-        .container{
-            max-width:900px;
-            margin:auto;
-            padding:100px 20px;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        h1{
-            font-size:60px;
-            color:#22d3ee;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.20), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.16), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(59, 130, 246, 0.18), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-        p{
-            font-size:20px;
-            color:#cbd5e1;
-        }
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
 
-        .game-card{
-            margin-top:50px;
-            padding:25px;
-            background:#1e293b;
-            border-radius:20px;
-        }
+    header {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
 
-        a{
-            color:#22d3ee;
-            text-decoration:none;
-        }
-    </style>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue), var(--pink));
+      box-shadow: 0 0 28px rgba(34, 211, 238, .35);
+      position: relative;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 9px;
+      background: #071021;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: .2s;
+    }
+
+    nav a:hover {
+      color: var(--cyan);
+    }
+
+    .hero {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 85px 0 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--cyan);
+      background: rgba(15, 23, 42, .65);
+      backdrop-filter: blur(12px);
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: .95;
+      letter-spacing: -4px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, var(--cyan), #a78bfa, var(--pink));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      transition: .25s;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #04111f;
+      box-shadow: 0 15px 40px rgba(34, 211, 238, .25);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(34, 211, 238, .55);
+    }
+
+    section {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      margin: 30px 0 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: -1px;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .game-card {
+      min-height: 360px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(30, 41, 72, .88), rgba(15, 23, 42, .82));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .game-card::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: rgba(34, 211, 238, .22);
+      filter: blur(18px);
+      z-index: -1;
+    }
+
+    .game-visual {
+      height: 150px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(34, 211, 238, .35), transparent 35%),
+        linear-gradient(135deg, rgba(59, 130, 246, .4), rgba(236, 72, 153, .28)),
+        #111827;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .cube {
+      width: 74px;
+      height: 74px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #22d3ee, #60a5fa);
+      box-shadow: 0 18px 40px rgba(34, 211, 238, .35);
+      transform: rotate(-8deg);
+      position: relative;
+    }
+
+    .cube::after {
+      content: "BC";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #06111e;
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, .11);
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .game-card h3 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    .game-card p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 14px 0 22px;
+    }
+
+    .coming {
+      opacity: .65;
+    }
+
+    .info-panel {
+      margin-top: 24px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: rgba(15, 23, 42, .72);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-panel h2 {
+      margin: 0 0 12px;
+    }
+
+    .info-panel p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .contact-box {
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      padding: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-box a {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 40px));
+      margin: 50px auto 0;
+      padding: 30px 0 40px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 16px;
+    }
+
+    footer a:hover {
+      color: var(--cyan);
+    }
+
+    @media (max-width: 850px) {
+      nav {
+        display: none;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-panel {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="noise"></div>
 
-<div class="container">
-
-    <h1>NexHeart Studio</h1>
-
-    <p>
-        Creating fun and memorable mobile games.
-    </p>
-
-    <div class="game-card">
-        <h2>Bounce Cube</h2>
-
-        <p>
-            Endless jumping adventure.
-        </p>
+  <header>
+    <div class="brand">
+      <div class="logo-mark"></div>
+      <span>NexHeart Studio</span>
     </div>
 
-</div>
+    <nav>
+      <a href="#games">Games</a>
+      <a href="#studio">Studio</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="mailto:mustafaoktyy@gmail.com">Contact</a>
+    </nav>
+  </header>
 
+  <main>
+    <section class="hero">
+      <div class="badge">◆ Indie Mobile Game Studio</div>
+
+      <h1>
+        Games with <span class="gradient-text">heart, speed</span> and style.
+      </h1>
+
+      <p>
+        NexHeart Studio creates polished mobile games built around simple controls,
+        satisfying progression and memorable visual identity.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="#games">Explore Games</a>
+        <a class="btn" href="privacy-policy.html">Privacy Policy</a>
+      </div>
+    </section>
+
+    <section id="games">
+      <div class="section-title">
+        <h2>Games</h2>
+        <span>Current and upcoming projects</span>
+      </div>
+
+      <div class="games-grid">
+        <article class="game-card">
+          <div class="game-visual">
+            <div class="cube"></div>
+          </div>
+
+          <span class="tag">AVAILABLE SOON</span>
+          <h3>Bounce Cube</h3>
+
+          <p>
+            A fast-paced endless arcade jumping game where timing, reflexes and
+            score chasing define the climb.
+          </p>
+
+          <a class="btn btn-primary" href="#">Google Play Coming Soon</a>
+        </article>
+
+        <article class="game-card coming">
+          <div class="game-visual"></div>
+          <span class="tag">IN DEVELOPMENT</span>
+          <h3>Next Mobile Game</h3>
+          <p>
+            A new NexHeart project is already being shaped. More details will be
+            revealed soon.
+          </p>
+          <a class="btn" href="#">Coming Soon</a>
+        </article>
+
+        <article class="game-card coming">
+          <div class="game-visual"></div>
+          <span class="tag">CONCEPT</span>
+          <h3>Future Project</h3>
+          <p>
+            Experimental ideas, arcade systems and fresh mobile game concepts are
+            being prototyped.
+          </p>
+          <a class="btn" href="#">Not Announced</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="studio">
+      <div class="info-panel">
+        <div>
+          <h2>About NexHeart Studio</h2>
+          <p>
+            NexHeart Studio is an independent game studio focused on creating
+            accessible, stylish and replayable mobile games. Our goal is simple:
+            make games that feel good from the first tap.
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <h2>Contact</h2>
+          <p>
+            Business, support or privacy questions:
+            <br /><br />
+            <a href="mailto:mustafaoktyy@gmail.com">mustafaoktyy@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 NexHeart Studio. All rights reserved.</span>
+    <div>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="app-ads.txt">app-ads.txt</a>
+    </div>
+  </footer>
 </body>
 </html>
