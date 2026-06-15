@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NexHeart Studio</title>
-  <meta name="description" content="NexHeart Studio creates fun, polished and memorable mobile games." />
+  <meta name="description" content="NexHeart Studio creates polished mobile games including Bounce Cube." />
 
   <style>
     :root {
       --bg: #070b18;
       --panel: rgba(18, 28, 52, 0.78);
-      --panel-strong: rgba(26, 39, 72, 0.95);
       --text: #f8fafc;
       --muted: #94a3b8;
       --cyan: #22d3ee;
@@ -20,9 +19,7 @@
       --shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -32,7 +29,7 @@
         radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.20), transparent 28%),
         radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.16), transparent 28%),
         radial-gradient(circle at 50% 90%, rgba(59, 130, 246, 0.18), transparent 35%),
-        var(--bg);
+        #070b18;
       color: var(--text);
       overflow-x: hidden;
     }
@@ -41,8 +38,9 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
       background-size: 48px 48px;
       mask-image: linear-gradient(to bottom, black, transparent 85%);
     }
@@ -62,25 +60,16 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
-      letter-spacing: .5px;
+      font-weight: 900;
+      letter-spacing: .4px;
     }
 
-    .logo-mark {
-      width: 42px;
-      height: 42px;
+    .site-logo {
+      width: 46px;
+      height: 46px;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--cyan), var(--blue), var(--pink));
+      object-fit: cover;
       box-shadow: 0 0 28px rgba(34, 211, 238, .35);
-      position: relative;
-    }
-
-    .logo-mark::after {
-      content: "";
-      position: absolute;
-      inset: 10px;
-      border-radius: 9px;
-      background: #071021;
     }
 
     nav {
@@ -95,16 +84,18 @@
       transition: .2s;
     }
 
-    nav a:hover {
-      color: var(--cyan);
-    }
+    nav a:hover { color: var(--cyan); }
 
     .hero {
       width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 85px 0 60px;
+      padding: 76px 0 58px;
       position: relative;
       z-index: 2;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 56px;
+      align-items: center;
     }
 
     .badge {
@@ -124,7 +115,7 @@
     h1 {
       margin: 0;
       max-width: 780px;
-      font-size: clamp(48px, 8vw, 92px);
+      font-size: clamp(46px, 7vw, 86px);
       line-height: .95;
       letter-spacing: -4px;
     }
@@ -157,18 +148,91 @@
       color: var(--text);
       border: 1px solid var(--border);
       transition: .25s;
-      font-weight: 700;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--cyan), var(--blue));
       color: #04111f;
       box-shadow: 0 15px 40px rgba(34, 211, 238, .25);
+      border: none;
     }
 
     .btn:hover {
       transform: translateY(-2px);
       border-color: rgba(34, 211, 238, .55);
+    }
+
+    .hero-card {
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(30, 41, 72, .90), rgba(15, 23, 42, .82));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      right: -80px;
+      top: -80px;
+      background: rgba(34, 211, 238, .22);
+      filter: blur(22px);
+    }
+
+    .game-icon-large {
+      width: 132px;
+      height: 132px;
+      border-radius: 28px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 22px;
+      box-shadow: 0 20px 55px rgba(34, 211, 238, .28);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card h2 {
+      margin: 0;
+      font-size: 36px;
+      letter-spacing: -1px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 18px 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      color: #dbeafe;
+      font-weight: 800;
+      font-size: 14px;
     }
 
     section {
@@ -179,7 +243,7 @@
     }
 
     .section-title {
-      margin: 30px 0 22px;
+      margin: 34px 0 22px;
       display: flex;
       justify-content: space-between;
       align-items: end;
@@ -188,7 +252,7 @@
 
     .section-title h2 {
       margin: 0;
-      font-size: 34px;
+      font-size: 36px;
       letter-spacing: -1px;
     }
 
@@ -197,98 +261,71 @@
       font-size: 15px;
     }
 
-    .games-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .game-card {
-      min-height: 360px;
+    .featured-game {
       border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 24px;
-      background: linear-gradient(180deg, rgba(30, 41, 72, .88), rgba(15, 23, 42, .82));
+      border-radius: 30px;
+      background: rgba(15, 23, 42, .72);
+      padding: 28px;
       box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .game-card::before {
-      content: "";
-      position: absolute;
-      inset: -80px -80px auto auto;
-      width: 190px;
-      height: 190px;
-      border-radius: 50%;
-      background: rgba(34, 211, 238, .22);
-      filter: blur(18px);
-      z-index: -1;
-    }
-
-    .game-visual {
-      height: 150px;
-      border-radius: 22px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(34, 211, 238, .35), transparent 35%),
-        linear-gradient(135deg, rgba(59, 130, 246, .4), rgba(236, 72, 153, .28)),
-        #111827;
       display: grid;
-      place-items: center;
-      margin-bottom: 22px;
-      border: 1px solid rgba(255,255,255,.08);
+      grid-template-columns: .75fr 1.25fr;
+      gap: 28px;
+      align-items: center;
     }
 
-    .cube {
-      width: 74px;
-      height: 74px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #22d3ee, #60a5fa);
-      box-shadow: 0 18px 40px rgba(34, 211, 238, .35);
-      transform: rotate(-8deg);
-      position: relative;
-    }
-
-    .cube::after {
-      content: "BC";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: #06111e;
-      font-weight: 900;
-      font-size: 22px;
+    .featured-game img {
+      width: 100%;
+      border-radius: 26px;
+      object-fit: cover;
+      box-shadow: 0 20px 55px rgba(0,0,0,.35);
     }
 
     .tag {
       display: inline-block;
-      padding: 6px 10px;
+      padding: 7px 11px;
       border-radius: 999px;
       background: rgba(34, 211, 238, .11);
       color: var(--cyan);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 12px;
     }
 
-    .game-card h3 {
+    .featured-game h3 {
       margin: 0;
-      font-size: 27px;
+      font-size: 42px;
+      letter-spacing: -1px;
     }
 
-    .game-card p {
+    .featured-game p {
       color: var(--muted);
-      line-height: 1.65;
-      margin: 14px 0 22px;
+      line-height: 1.75;
+      font-size: 17px;
+      margin: 16px 0 24px;
     }
 
-    .coming {
-      opacity: .65;
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .screenshot-grid img {
+      width: 100%;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: .3s ease;
+      background: rgba(15, 23, 42, .75);
+    }
+
+    .screenshot-grid img:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(34, 211, 238, .55);
     }
 
     .info-panel {
-      margin-top: 24px;
+      margin-top: 34px;
       border: 1px solid var(--border);
       border-radius: 28px;
       background: rgba(15, 23, 42, .72);
@@ -299,9 +336,7 @@
       box-shadow: var(--shadow);
     }
 
-    .info-panel h2 {
-      margin: 0 0 12px;
-    }
+    .info-panel h2 { margin: 0 0 12px; }
 
     .info-panel p {
       color: var(--muted);
@@ -319,7 +354,7 @@
     .contact-box a {
       color: var(--cyan);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     footer {
@@ -342,25 +377,37 @@
       margin-left: 16px;
     }
 
-    footer a:hover {
-      color: var(--cyan);
-    }
+    footer a:hover { color: var(--cyan); }
 
-    @media (max-width: 850px) {
-      nav {
-        display: none;
-      }
+    @media (max-width: 900px) {
+      nav { display: none; }
 
-      .games-grid {
+      .hero {
         grid-template-columns: 1fr;
+        padding-top: 48px;
       }
 
+      .featured-game,
       .info-panel {
         grid-template-columns: 1fr;
       }
 
+      .screenshot-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       h1 {
         letter-spacing: -2px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .screenshot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-game h3 {
+        font-size: 34px;
       }
     }
   </style>
@@ -371,12 +418,13 @@
 
   <header>
     <div class="brand">
-      <div class="logo-mark"></div>
+      <img src="assets/images/nexheart-logo.jpg" alt="NexHeart Studio Logo" class="site-logo">
       <span>NexHeart Studio</span>
     </div>
 
     <nav>
-      <a href="#games">Games</a>
+      <a href="#game">Game</a>
+      <a href="#screenshots">Screenshots</a>
       <a href="#studio">Studio</a>
       <a href="privacy-policy.html">Privacy</a>
       <a href="mailto:mustafaoktyy@gmail.com">Contact</a>
@@ -385,67 +433,87 @@
 
   <main>
     <section class="hero">
-      <div class="badge">◆ Indie Mobile Game Studio</div>
+      <div>
+        <div class="badge">◆ Indie Mobile Game Studio</div>
 
-      <h1>
-        Games with <span class="gradient-text">heart, speed</span> and style.
-      </h1>
+        <h1>
+          Creating <span class="gradient-text">polished arcade</span> games for mobile.
+        </h1>
 
-      <p>
-        NexHeart Studio creates polished mobile games built around simple controls,
-        satisfying progression and memorable visual identity.
-      </p>
+        <p>
+          NexHeart Studio builds stylish, replayable and satisfying mobile games.
+          Our first release, Bounce Cube, is now available on Google Play.
+        </p>
 
-      <div class="actions">
-        <a class="btn btn-primary" href="#games">Explore Games</a>
-        <a class="btn" href="privacy-policy.html">Privacy Policy</a>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank">
+            Play Bounce Cube
+          </a>
+          <a class="btn" href="#screenshots">View Screenshots</a>
+        </div>
       </div>
+
+      <aside class="hero-card">
+        <img src="assets/images/bounce-cube-icon.png" alt="Bounce Cube Icon" class="game-icon-large">
+
+        <h2>Bounce Cube</h2>
+
+        <p>
+          Jump, climb, collect BC cubes, unlock unique characters and chase your highest score.
+        </p>
+
+        <div class="stats">
+          <span class="stat">★★★★★ 5.0</span>
+          <span class="stat">Arcade</span>
+          <span class="stat">Google Play</span>
+        </div>
+
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank">
+          Get it on Google Play
+        </a>
+      </aside>
     </section>
 
-    <section id="games">
+    <section id="game">
       <div class="section-title">
-        <h2>Games</h2>
-        <span>Current and upcoming projects</span>
+        <h2>Featured Game</h2>
+        <span>Official NexHeart Studio release</span>
       </div>
 
-      <div class="games-grid">
-        <article class="game-card">
-          <div class="game-visual">
-            <div class="cube"></div>
-          </div>
+      <div class="featured-game">
+        <img src="assets/images/screenshot-2.png" alt="Bounce Cube Gameplay Screenshot">
 
-          <span class="tag">AVAILABLE SOON</span>
+        <div>
+          <span class="tag">AVAILABLE ON GOOGLE PLAY</span>
           <h3>Bounce Cube</h3>
 
           <p>
-            A fast-paced endless arcade jumping game where timing, reflexes and
-            score chasing define the climb.
+            Bounce Cube is a fast-paced endless arcade jumping game where timing,
+            reflexes and smart progression define every climb. Collect BC cubes,
+            unlock rare heroes, track your best stats and keep pushing your score higher.
           </p>
 
-          <a class="btn btn-primary" href="#">Google Play Coming Soon</a>
-        </article>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank">
+              Open on Google Play
+            </a>
+            <a class="btn" href="privacy-policy.html">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <article class="game-card coming">
-          <div class="game-visual"></div>
-          <span class="tag">IN DEVELOPMENT</span>
-          <h3>Next Mobile Game</h3>
-          <p>
-            A new NexHeart project is already being shaped. More details will be
-            revealed soon.
-          </p>
-          <a class="btn" href="#">Coming Soon</a>
-        </article>
+    <section id="screenshots">
+      <div class="section-title">
+        <h2>Game Screenshots</h2>
+        <span>Bounce Cube on Google Play</span>
+      </div>
 
-        <article class="game-card coming">
-          <div class="game-visual"></div>
-          <span class="tag">CONCEPT</span>
-          <h3>Future Project</h3>
-          <p>
-            Experimental ideas, arcade systems and fresh mobile game concepts are
-            being prototyped.
-          </p>
-          <a class="btn" href="#">Not Announced</a>
-        </article>
+      <div class="screenshot-grid">
+        <img src="assets/images/screenshot-1.png" alt="Bounce Cube character collection screenshot">
+        <img src="assets/images/screenshot-2.png" alt="Bounce Cube gameplay screenshot">
+        <img src="assets/images/screenshot-3.png" alt="Bounce Cube unlock heroes screenshot">
+        <img src="assets/images/screenshot-4.png" alt="Bounce Cube stats screenshot">
       </div>
     </section>
 
@@ -456,7 +524,7 @@
           <p>
             NexHeart Studio is an independent game studio focused on creating
             accessible, stylish and replayable mobile games. Our goal is simple:
-            make games that feel good from the first tap.
+            make games that feel good from the first tap and stay satisfying after every run.
           </p>
         </div>
 
@@ -464,7 +532,7 @@
           <h2>Contact</h2>
           <p>
             Business, support or privacy questions:
-            <br /><br />
+            <br><br>
             <a href="mailto:mustafaoktyy@gmail.com">mustafaoktyy@gmail.com</a>
           </p>
         </div>
