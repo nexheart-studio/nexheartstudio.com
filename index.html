@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,6 @@
   <style>
     :root {
       --bg: #070b18;
-      --panel: rgba(18, 28, 52, 0.78);
       --text: #f8fafc;
       --muted: #94a3b8;
       --cyan: #22d3ee;
@@ -45,15 +45,19 @@
       mask-image: linear-gradient(to bottom, black, transparent 85%);
     }
 
-    header {
+    header, section, footer {
       width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
       padding: 28px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
-      z-index: 2;
+      gap: 18px;
     }
 
     .brand {
@@ -72,6 +76,12 @@
       box-shadow: 0 0 28px rgba(34, 211, 238, .35);
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
     nav {
       display: flex;
       gap: 22px;
@@ -86,12 +96,32 @@
 
     nav a:hover { color: var(--cyan); }
 
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, .70);
+    }
+
+    .lang-switch button {
+      border: none;
+      border-radius: 999px;
+      padding: 7px 10px;
+      cursor: pointer;
+      color: var(--muted);
+      background: transparent;
+      font-weight: 900;
+    }
+
+    .lang-switch button.active {
+      color: #04111f;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+    }
+
     .hero {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
       padding: 76px 0 58px;
-      position: relative;
-      z-index: 2;
       display: grid;
       grid-template-columns: 1.05fr .95fr;
       gap: 56px;
@@ -100,8 +130,6 @@
 
     .badge {
       display: inline-flex;
-      gap: 8px;
-      align-items: center;
       padding: 8px 14px;
       border: 1px solid var(--border);
       border-radius: 999px;
@@ -201,19 +229,23 @@
       z-index: 1;
     }
 
+    .hero-card h2,
+    .hero-card p,
+    .stats,
+    .hero-card .btn {
+      position: relative;
+      z-index: 1;
+    }
+
     .hero-card h2 {
       margin: 0;
       font-size: 36px;
       letter-spacing: -1px;
-      position: relative;
-      z-index: 1;
     }
 
     .hero-card p {
       color: var(--muted);
       line-height: 1.7;
-      position: relative;
-      z-index: 1;
     }
 
     .stats {
@@ -221,8 +253,6 @@
       gap: 14px;
       flex-wrap: wrap;
       margin: 18px 0 24px;
-      position: relative;
-      z-index: 1;
     }
 
     .stat {
@@ -233,13 +263,6 @@
       color: #dbeafe;
       font-weight: 800;
       font-size: 14px;
-    }
-
-    section {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
     }
 
     .section-title {
@@ -304,6 +327,27 @@
       margin: 16px 0 24px;
     }
 
+    .update-box {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .update-box h4 {
+      margin: 0 0 12px;
+      color: var(--cyan);
+      font-size: 16px;
+    }
+
+    .update-box ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
     .screenshot-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -358,8 +402,7 @@
     }
 
     footer {
-      width: min(1120px, calc(100% - 40px));
-      margin: 50px auto 0;
+      margin-top: 50px;
       padding: 30px 0 40px;
       border-top: 1px solid var(--border);
       color: var(--muted);
@@ -367,8 +410,6 @@
       justify-content: space-between;
       gap: 18px;
       flex-wrap: wrap;
-      position: relative;
-      z-index: 2;
     }
 
     footer a {
@@ -402,6 +443,14 @@
     }
 
     @media (max-width: 520px) {
+      .header-right {
+        gap: 10px;
+      }
+
+      .brand span {
+        display: none;
+      }
+
       .screenshot-grid {
         grid-template-columns: 1fr;
       }
@@ -422,34 +471,40 @@
       <span>NexHeart Studio</span>
     </div>
 
-    <nav>
-      <a href="#game">Game</a>
-      <a href="#screenshots">Screenshots</a>
-      <a href="#studio">Studio</a>
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="mailto:nexheart1811@gmail.com">Contact</a>
-    </nav>
+    <div class="header-right">
+      <nav>
+        <a href="#game" data-i18n="navGame">Game</a>
+        <a href="#screenshots" data-i18n="navScreenshots">Screenshots</a>
+        <a href="#studio" data-i18n="navStudio">Studio</a>
+        <a href="privacy-policy.html" data-i18n="navPrivacy">Privacy</a>
+        <a href="mailto:nexheart1811@gmail.com" data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="lang-switch">
+        <button type="button" id="lang-en" class="active" onclick="setLang('en')">EN</button>
+        <button type="button" id="lang-tr" onclick="setLang('tr')">TR</button>
+      </div>
+    </div>
   </header>
 
   <main>
     <section class="hero">
       <div>
-        <div class="badge">◆ Indie Mobile Game Studio</div>
+        <div class="badge" data-i18n="badge">◆ Indie Mobile Game Studio</div>
 
-        <h1>
-          Creating <span class="gradient-text">polished arcade</span> games for mobile.
+        <h1 data-i18n-html="heroTitle">
+          Games built around skill, <span class="gradient-text">progression</span> and unforgettable cubes.
         </h1>
 
-        <p>
-          NexHeart Studio builds stylish, replayable and satisfying mobile games.
-          Our first release, Bounce Cube, is now available on Google Play.
+        <p data-i18n="heroDesc">
+          NexHeart Studio creates polished arcade experiences focused on satisfying gameplay, rewarding progression and memorable cube characters.
         </p>
 
         <div class="actions">
-          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank">
-            Play Bounce Cube
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank" data-i18n="heroButton">
+            Download on Google Play
           </a>
-          <a class="btn" href="#screenshots">View Screenshots</a>
+          <a class="btn" href="#screenshots" data-i18n="screensButton">View Screenshots</a>
         </div>
       </div>
 
@@ -458,17 +513,17 @@
 
         <h2>Bounce Cube</h2>
 
-        <p>
-          Jump, climb, collect BC cubes, unlock unique characters and chase your highest score.
+        <p data-i18n="heroCardDesc">
+          Jump higher, collect BC cubes, unlock unique characters and beat your best score.
         </p>
 
         <div class="stats">
           <span class="stat">★★★★★ 5.0</span>
-          <span class="stat">Arcade</span>
+          <span class="stat" data-i18n="statArcade">Arcade</span>
           <span class="stat">Google Play</span>
         </div>
 
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank" data-i18n="playButton">
           Get it on Google Play
         </a>
       </aside>
@@ -476,28 +531,38 @@
 
     <section id="game">
       <div class="section-title">
-        <h2>Featured Game</h2>
-        <span>Official NexHeart Studio release</span>
+        <h2 data-i18n="featuredTitle">Featured Game</h2>
+        <span data-i18n="featuredSubtitle">Official NexHeart Studio release</span>
       </div>
 
       <div class="featured-game">
         <img src="assets/images/screenshot-2.png" alt="Bounce Cube Gameplay Screenshot">
 
         <div>
-          <span class="tag">AVAILABLE ON GOOGLE PLAY</span>
+          <span class="tag" data-i18n="availableTag">AVAILABLE ON GOOGLE PLAY</span>
           <h3>Bounce Cube</h3>
 
-          <p>
-            Bounce Cube is a fast-paced endless arcade jumping game where timing,
-            reflexes and smart progression define every climb. Collect BC cubes,
-            unlock rare heroes, track your best stats and keep pushing your score higher.
+          <p data-i18n="featuredDesc">
+            Bounce Cube is a fast-paced endless arcade climber where every jump matters. Collect BC cubes, unlock over 40 unique characters, complete achievements, compete on Google Play leaderboards and push your skills to the limit.
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank">
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank" data-i18n="openPlay">
               Open on Google Play
             </a>
-            <a class="btn" href="privacy-policy.html">Privacy Policy</a>
+            <a class="btn" href="privacy-policy.html" data-i18n="privacyButton">Privacy Policy</a>
+          </div>
+
+          <div class="update-box">
+            <h4 data-i18n="updateTitle">Latest Update - Version 1.1</h4>
+            <ul>
+              <li data-i18n="update1">Google Play Games integration</li>
+              <li data-i18n="update2">Achievements system</li>
+              <li data-i18n="update3">Global leaderboards</li>
+              <li data-i18n="update4">2X BC reward system</li>
+              <li data-i18n="update5">Platform theme system</li>
+              <li data-i18n="update6">Performance improvements and bug fixes</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -505,8 +570,8 @@
 
     <section id="screenshots">
       <div class="section-title">
-        <h2>Game Screenshots</h2>
-        <span>Bounce Cube on Google Play</span>
+        <h2 data-i18n="screensTitle">Game Screenshots</h2>
+        <span data-i18n="screensSubtitle">Bounce Cube on Google Play</span>
       </div>
 
       <div class="screenshot-grid">
@@ -520,18 +585,16 @@
     <section id="studio">
       <div class="info-panel">
         <div>
-          <h2>About NexHeart Studio</h2>
-          <p>
-            NexHeart Studio is an independent game studio focused on creating
-            accessible, stylish and replayable mobile games. Our goal is simple:
-            make games that feel good from the first tap and stay satisfying after every run.
+          <h2 data-i18n="aboutTitle">About NexHeart Studio</h2>
+          <p data-i18n="aboutDesc">
+            NexHeart Studio is an independent game studio focused on creating high-quality mobile arcade games. We believe great mobile games should be accessible, rewarding and instantly fun.
           </p>
         </div>
 
         <div class="contact-box">
-          <h2>Contact</h2>
+          <h2 data-i18n="contactTitle">Contact</h2>
           <p>
-            Business, support or privacy questions:
+            <span data-i18n="contactDesc">Business inquiries, support requests and privacy questions:</span>
             <br><br>
             <a href="mailto:nexheart1811@gmail.com">nexheart1811@gmail.com</a>
           </p>
@@ -541,11 +604,114 @@
   </main>
 
   <footer>
-    <span>© 2026 NexHeart Studio. All rights reserved.</span>
+    <span data-i18n="footer">© 2026 NexHeart Studio. All rights reserved.</span>
     <div>
-      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="privacy-policy.html" data-i18n="footerPrivacy">Privacy Policy</a>
       <a href="app-ads.txt">app-ads.txt</a>
     </div>
   </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navGame: "Game",
+        navScreenshots: "Screenshots",
+        navStudio: "Studio",
+        navPrivacy: "Privacy",
+        navContact: "Contact",
+        badge: "◆ Indie Mobile Game Studio",
+        heroTitle: 'Games built around skill, <span class="gradient-text">progression</span> and unforgettable cubes.',
+        heroDesc: "NexHeart Studio creates polished arcade experiences focused on satisfying gameplay, rewarding progression and memorable cube characters.",
+        heroButton: "Download on Google Play",
+        screensButton: "View Screenshots",
+        heroCardDesc: "Jump higher, collect BC cubes, unlock unique characters and beat your best score.",
+        statArcade: "Arcade",
+        playButton: "Get it on Google Play",
+        featuredTitle: "Featured Game",
+        featuredSubtitle: "Official NexHeart Studio release",
+        availableTag: "AVAILABLE ON GOOGLE PLAY",
+        featuredDesc: "Bounce Cube is a fast-paced endless arcade climber where every jump matters. Collect BC cubes, unlock over 40 unique characters, complete achievements, compete on Google Play leaderboards and push your skills to the limit.",
+        openPlay: "Open on Google Play",
+        privacyButton: "Privacy Policy",
+        updateTitle: "Latest Update - Version 1.1",
+        update1: "Google Play Games integration",
+        update2: "Achievements system",
+        update3: "Global leaderboards",
+        update4: "2X BC reward system",
+        update5: "Platform theme system",
+        update6: "Performance improvements and bug fixes",
+        screensTitle: "Game Screenshots",
+        screensSubtitle: "Bounce Cube on Google Play",
+        aboutTitle: "About NexHeart Studio",
+        aboutDesc: "NexHeart Studio is an independent game studio focused on creating high-quality mobile arcade games. We believe great mobile games should be accessible, rewarding and instantly fun.",
+        contactTitle: "Contact",
+        contactDesc: "Business inquiries, support requests and privacy questions:",
+        footer: "© 2026 NexHeart Studio. All rights reserved.",
+        footerPrivacy: "Privacy Policy"
+      },
+      tr: {
+        navGame: "Oyun",
+        navScreenshots: "Ekran Görüntüleri",
+        navStudio: "Stüdyo",
+        navPrivacy: "Gizlilik",
+        navContact: "İletişim",
+        badge: "◆ Bağımsız Mobil Oyun Stüdyosu",
+        heroTitle: 'Yetenek, <span class="gradient-text">ilerleme</span> ve unutulmaz küpler üzerine kurulu oyunlar.',
+        heroDesc: "NexHeart Studio; tatmin edici oynanış, ödüllendirici ilerleme ve akılda kalıcı küp karakterler üzerine kurulu mobil arcade deneyimleri geliştirir.",
+        heroButton: "Google Play'den İndir",
+        screensButton: "Ekran Görüntülerini Gör",
+        heroCardDesc: "Daha yükseğe zıpla, BC küplerini topla, benzersiz karakterleri aç ve en yüksek skorunu geç.",
+        statArcade: "Arcade",
+        playButton: "Google Play'de Aç",
+        featuredTitle: "Öne Çıkan Oyun",
+        featuredSubtitle: "Resmi NexHeart Studio oyunu",
+        availableTag: "GOOGLE PLAY'DE YAYINDA",
+        featuredDesc: "Bounce Cube, her zıplamanın önemli olduğu hızlı tempolu sonsuz bir arcade tırmanış oyunudur. BC küplerini topla, 40'tan fazla benzersiz karakterin kilidini aç, başarımları tamamla, Google Play liderlik tablolarında yarış ve en yüksek skorunu zorla.",
+        openPlay: "Google Play'de Aç",
+        privacyButton: "Gizlilik Politikası",
+        updateTitle: "Son Güncelleme - Sürüm 1.1",
+        update1: "Google Play Games entegrasyonu",
+        update2: "Başarım sistemi",
+        update3: "Global liderlik tabloları",
+        update4: "2X BC ödül sistemi",
+        update5: "Platform tema sistemi",
+        update6: "Performans iyileştirmeleri ve hata düzeltmeleri",
+        screensTitle: "Oyun Ekran Görüntüleri",
+        screensSubtitle: "Google Play'de Bounce Cube",
+        aboutTitle: "NexHeart Studio Hakkında",
+        aboutDesc: "NexHeart Studio, yüksek kaliteli mobil arcade oyunları geliştirmeye odaklanan bağımsız bir oyun stüdyosudur. İyi bir mobil oyunun erişilebilir, ödüllendirici ve ilk dokunuştan itibaren eğlenceli olması gerektiğine inanıyoruz.",
+        contactTitle: "İletişim",
+        contactDesc: "İş birlikleri, destek talepleri ve gizlilik soruları:",
+        footer: "© 2026 NexHeart Studio. Tüm hakları saklıdır.",
+        footerPrivacy: "Gizlilik Politikası"
+      }
+    };
+
+    function setLang(lang) {
+      const dictionary = translations[lang];
+
+      document.documentElement.lang = lang;
+      localStorage.setItem("nexheart-lang", lang);
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (dictionary[key]) {
+          element.textContent = dictionary[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+        const key = element.getAttribute("data-i18n-html");
+        if (dictionary[key]) {
+          element.innerHTML = dictionary[key];
+        }
+      });
+
+      document.getElementById("lang-en").classList.toggle("active", lang === "en");
+      document.getElementById("lang-tr").classList.toggle("active", lang === "tr");
+    }
+
+    setLang(localStorage.getItem("nexheart-lang") || "en");
+  </script>
 </body>
 </html>
