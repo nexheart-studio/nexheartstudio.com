@@ -1,0 +1,58 @@
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 520ms ease,
+    transform 520ms ease;
+}
+
+.reveal.is-visible,
+body.no-js .reveal {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal:nth-child(2) {
+  transition-delay: 70ms;
+}
+
+.reveal:nth-child(3) {
+  transition-delay: 110ms;
+}
+
+@keyframes cubeDrift {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      rotateX(calc(-18deg + var(--cube-rotate-x)))
+      rotateY(calc(-32deg + var(--cube-rotate-y)))
+      rotateZ(4deg);
+  }
+
+  50% {
+    transform:
+      translate3d(0, -18px, 0)
+      rotateX(calc(-14deg + var(--cube-rotate-x)))
+      rotateY(calc(-26deg + var(--cube-rotate-y)))
+      rotateZ(4deg);
+  }
+}
+
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(28deg);
+  }
+
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(36deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
