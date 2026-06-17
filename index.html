@@ -3,713 +3,414 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NexHeart Studio</title>
-  <meta name="description" content="NexHeart Studio creates polished mobile games including Bounce Cube." />
+  <title>NexHeart Studio | Indie Game Studio</title>
+  <meta name="description" content="NexHeart Studio is an independent game studio building polished mobile arcade games, character-driven worlds, and the growing cube universe behind Bounce Cube." />
+  <meta name="author" content="NexHeart Studio" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#05060d" />
 
-  <style>
-    :root {
-      --bg: #070b18;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --cyan: #22d3ee;
-      --blue: #3b82f6;
-      --pink: #ec4899;
-      --border: rgba(148, 163, 184, 0.18);
-      --shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NexHeart Studio" />
+  <meta property="og:title" content="NexHeart Studio | Indie Game Studio" />
+  <meta property="og:description" content="A premium indie game studio building mobile arcade games, cube characters, and long-term game universes." />
+  <meta property="og:image" content="assets/images/bounce-cube-icon.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NexHeart Studio | Indie Game Studio" />
+  <meta name="twitter:description" content="Explore Bounce Cube, Internet Cafe Owner, and the growing NexHeart Studio universe." />
+  <meta name="twitter:image" content="assets/images/bounce-cube-icon.png" />
+
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" as="image" href="assets/images/bounce-cube-icon.png" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "NexHeart Studio",
+          "url": "https://nexheartstudio.com/",
+          "logo": "assets/icons/favicon.svg",
+          "email": "nexheart1811@gmail.com",
+          "sameAs": [
+            "https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube"
+          ]
+        },
+        {
+          "@type": "VideoGame",
+          "name": "Bounce Cube",
+          "applicationCategory": "Game",
+          "operatingSystem": "Android",
+          "publisher": {
+            "@type": "Organization",
+            "name": "NexHeart Studio"
+          },
+          "url": "https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube"
+        }
+      ]
     }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
-      background:
-        radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.20), transparent 28%),
-        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.16), transparent 28%),
-        radial-gradient(circle at 50% 90%, rgba(59, 130, 246, 0.18), transparent 35%),
-        #070b18;
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    .noise {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
-    }
-
-    header, section, footer {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    header {
-      padding: 28px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 900;
-      letter-spacing: .4px;
-    }
-
-    .site-logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      object-fit: cover;
-      box-shadow: 0 0 28px rgba(34, 211, 238, .35);
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    nav {
-      display: flex;
-      gap: 22px;
-      font-size: 14px;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: .2s;
-    }
-
-    nav a:hover { color: var(--cyan); }
-
-    .lang-switch {
-      display: flex;
-      gap: 6px;
-      padding: 5px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(15, 23, 42, .70);
-    }
-
-    .lang-switch button {
-      border: none;
-      border-radius: 999px;
-      padding: 7px 10px;
-      cursor: pointer;
-      color: var(--muted);
-      background: transparent;
-      font-weight: 900;
-    }
-
-    .lang-switch button.active {
-      color: #04111f;
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-    }
-
-    .hero {
-      padding: 76px 0 58px;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 56px;
-      align-items: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      padding: 8px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--cyan);
-      background: rgba(15, 23, 42, .65);
-      backdrop-filter: blur(12px);
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 780px;
-      font-size: clamp(46px, 7vw, 86px);
-      line-height: .95;
-      letter-spacing: -4px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #fff, var(--cyan), #a78bfa, var(--pink));
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 620px;
-      margin: 28px 0 0;
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.7;
-    }
-
-    .actions {
-      display: flex;
-      gap: 14px;
-      margin-top: 36px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 20px;
-      border-radius: 14px;
-      text-decoration: none;
-      color: var(--text);
-      border: 1px solid var(--border);
-      transition: .25s;
-      font-weight: 800;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--cyan), var(--blue));
-      color: #04111f;
-      box-shadow: 0 15px 40px rgba(34, 211, 238, .25);
-      border: none;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(34, 211, 238, .55);
-    }
-
-    .hero-card {
-      border: 1px solid var(--border);
-      border-radius: 34px;
-      padding: 28px;
-      background: linear-gradient(180deg, rgba(30, 41, 72, .90), rgba(15, 23, 42, .82));
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      border-radius: 999px;
-      right: -80px;
-      top: -80px;
-      background: rgba(34, 211, 238, .22);
-      filter: blur(22px);
-    }
-
-    .game-icon-large {
-      width: 132px;
-      height: 132px;
-      border-radius: 28px;
-      object-fit: cover;
-      display: block;
-      margin-bottom: 22px;
-      box-shadow: 0 20px 55px rgba(34, 211, 238, .28);
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-card h2,
-    .hero-card p,
-    .stats,
-    .hero-card .btn {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-card h2 {
-      margin: 0;
-      font-size: 36px;
-      letter-spacing: -1px;
-    }
-
-    .hero-card p {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .stats {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin: 18px 0 24px;
-    }
-
-    .stat {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--border);
-      color: #dbeafe;
-      font-weight: 800;
-      font-size: 14px;
-    }
-
-    .section-title {
-      margin: 34px 0 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-      font-size: 36px;
-      letter-spacing: -1px;
-    }
-
-    .section-title span {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .featured-game {
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: rgba(15, 23, 42, .72);
-      padding: 28px;
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: .75fr 1.25fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .featured-game img {
-      width: 100%;
-      border-radius: 26px;
-      object-fit: cover;
-      box-shadow: 0 20px 55px rgba(0,0,0,.35);
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(34, 211, 238, .11);
-      color: var(--cyan);
-      font-size: 12px;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .featured-game h3 {
-      margin: 0;
-      font-size: 42px;
-      letter-spacing: -1px;
-    }
-
-    .featured-game p {
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 17px;
-      margin: 16px 0 24px;
-    }
-
-    .update-box {
-      margin-top: 22px;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: rgba(255,255,255,.04);
-    }
-
-    .update-box h4 {
-      margin: 0 0 12px;
-      color: var(--cyan);
-      font-size: 16px;
-    }
-
-    .update-box ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .screenshot-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .screenshot-grid img {
-      width: 100%;
-      border-radius: 22px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      transition: .3s ease;
-      background: rgba(15, 23, 42, .75);
-    }
-
-    .screenshot-grid img:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: rgba(34, 211, 238, .55);
-    }
-
-    .info-panel {
-      margin-top: 34px;
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      background: rgba(15, 23, 42, .72);
-      padding: 28px;
-      display: grid;
-      grid-template-columns: 1.4fr .8fr;
-      gap: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .info-panel h2 { margin: 0 0 12px; }
-
-    .info-panel p {
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .contact-box {
-      border-radius: 22px;
-      background: rgba(255,255,255,.04);
-      padding: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .contact-box a {
-      color: var(--cyan);
-      text-decoration: none;
-      font-weight: 800;
-    }
-
-    footer {
-      margin-top: 50px;
-      padding: 30px 0 40px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 16px;
-    }
-
-    footer a:hover { color: var(--cyan); }
-
-    @media (max-width: 900px) {
-      nav { display: none; }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 48px;
-      }
-
-      .featured-game,
-      .info-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .screenshot-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .header-right {
-        gap: 10px;
-      }
-
-      .brand span {
-        display: none;
-      }
-
-      .screenshot-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .featured-game h3 {
-        font-size: 34px;
-      }
-    }
-  </style>
+  </script>
 </head>
 
 <body>
-  <div class="noise"></div>
+  <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
 
-  <header>
-    <div class="brand">
-      <img src="assets/images/nexheart-logo.jpg" alt="NexHeart Studio Logo" class="site-logo">
-      <span>NexHeart Studio</span>
-    </div>
+  <canvas class="particle-canvas" id="particle-canvas" aria-hidden="true"></canvas>
+  <div class="site-atmosphere" aria-hidden="true">
+    <div class="atmosphere-grid"></div>
+    <div class="atmosphere-glow glow-one"></div>
+    <div class="atmosphere-glow glow-two"></div>
+  </div>
 
-    <div class="header-right">
-      <nav>
-        <a href="#game" data-i18n="navGame">Game</a>
+  <header class="site-header" data-site-header>
+    <div class="container header-inner">
+      <a class="brand" href="#hero" aria-label="NexHeart Studio home">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/icons/favicon.svg" alt="" width="42" height="42" decoding="async" />
+        </span>
+        <span class="brand-copy">
+          <strong>NexHeart</strong>
+          <small>Studio</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#studio-showcase" data-i18n="navStudio">Studio</a>
+        <a href="#featured-game" data-i18n="navFeatured">Featured</a>
+        <a href="#cube-universe" data-i18n="navUniverse">Universe</a>
         <a href="#screenshots" data-i18n="navScreenshots">Screenshots</a>
-        <a href="#studio" data-i18n="navStudio">Studio</a>
-        <a href="privacy-policy.html" data-i18n="navPrivacy">Privacy</a>
-        <a href="mailto:nexheart1811@gmail.com" data-i18n="navContact">Contact</a>
+        <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
       </nav>
 
-      <div class="lang-switch">
-        <button type="button" id="lang-en" class="active" onclick="setLang('en')">EN</button>
-        <button type="button" id="lang-tr" onclick="setLang('tr')">TR</button>
+      <div class="header-actions">
+        <a class="header-play-link" href="#" target="_blank" rel="noopener noreferrer" data-play-link data-i18n="headerPlay">
+          Google Play
+        </a>
+        <div class="language-switch" aria-label="Language selection">
+          <button class="language-option is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="language-option" type="button" data-lang="tr" aria-pressed="false">TR</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <div class="badge" data-i18n="badge">◆ Indie Mobile Game Studio</div>
+  <main id="main">
+    <section class="hero-section" id="hero" aria-labelledby="hero-title">
+      <div class="hero-world parallax-scene" data-parallax-scene aria-hidden="true">
+        <div class="world-layer depth-back" data-parallax-layer data-depth="0.08">
+          <span class="world-cube cube-small cube-a"></span>
+          <span class="world-cube cube-small cube-b"></span>
+          <span class="world-cube cube-tiny cube-c"></span>
+        </div>
+        <div class="world-layer depth-mid" data-parallax-layer data-depth="0.18">
+          <span class="world-ring"></span>
+          <span class="floating-platform platform-one"></span>
+          <span class="floating-platform platform-two"></span>
+        </div>
+        <div class="world-layer depth-front" data-parallax-layer data-depth="0.34">
+          <div class="hero-cube" data-hero-cube>
+            <span class="cube-face face-front"></span>
+            <span class="cube-face face-back"></span>
+            <span class="cube-face face-right"></span>
+            <span class="cube-face face-left"></span>
+            <span class="cube-face face-top"></span>
+            <span class="cube-face face-bottom"></span>
+          </div>
+        </div>
+      </div>
 
-        <h1 data-i18n-html="heroTitle">
-          Games built around skill, <span class="gradient-text">progression</span> and unforgettable cubes.
+      <div class="container hero-content">
+        <p class="eyebrow reveal" data-i18n="heroEyebrow">Independent Game Studio</p>
+        <h1 class="reveal" id="hero-title" data-i18n-html="heroTitle">
+          We build arcade games with <span class="text-gradient">heart, skill, and strange little cubes</span>.
         </h1>
-
-        <p data-i18n="heroDesc">
-          NexHeart Studio creates polished arcade experiences focused on satisfying gameplay, rewarding progression and memorable cube characters.
+        <p class="hero-mission reveal" data-i18n="heroMission">
+          NexHeart Studio is crafting mobile arcade experiences, character-driven systems, and a long-term universe that starts with Bounce Cube.
         </p>
 
-        <div class="actions">
-          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank" data-i18n="heroButton">
-            Download on Google Play
-          </a>
-          <a class="btn" href="#screenshots" data-i18n="screensButton">View Screenshots</a>
+        <div class="hero-actions reveal" aria-label="Primary actions">
+          <a class="button button-primary" href="#cube-universe" data-i18n="exploreUniverseButton">Explore the Universe</a>
+          <a class="button button-secondary" href="#" target="_blank" rel="noopener noreferrer" data-play-link data-i18n="downloadButton">Get Bounce Cube</a>
+        </div>
+
+        <dl class="studio-metrics reveal" aria-label="Studio highlights">
+          <div>
+            <dt data-i18n="metricReleased">Released</dt>
+            <dd>Bounce Cube</dd>
+          </div>
+          <div>
+            <dt data-i18n="metricNext">Next</dt>
+            <dd>Internet Cafe Owner</dd>
+          </div>
+          <div>
+            <dt data-i18n="metricFocus">Focus</dt>
+            <dd data-i18n="metricFocusValue">Arcade universes</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section studio-showcase" id="studio-showcase" aria-labelledby="studio-showcase-title">
+      <div class="container showcase-grid">
+        <div class="showcase-copy reveal">
+          <p class="eyebrow" data-i18n="showcaseEyebrow">Studio Showcase</p>
+          <h2 id="studio-showcase-title" data-i18n="showcaseTitle">A small studio building games with a bigger world behind them.</h2>
+          <p data-i18n="showcaseText">
+            We design mobile games around instantly readable action, satisfying progression, and characters that can grow across projects.
+          </p>
+        </div>
+
+        <div class="showcase-board reveal" aria-label="What NexHeart Studio builds">
+          <article>
+            <span class="board-index">01</span>
+            <h3 data-i18n="showcaseOneTitle">Arcade-first feel</h3>
+            <p data-i18n="showcaseOneText">Fast inputs, clean goals, and score-driven replay value.</p>
+          </article>
+          <article>
+            <span class="board-index">02</span>
+            <h3 data-i18n="showcaseTwoTitle">Progression systems</h3>
+            <p data-i18n="showcaseTwoText">Unlocks, achievements, rewards, and reasons to return.</p>
+          </article>
+          <article>
+            <span class="board-index">03</span>
+            <h3 data-i18n="showcaseThreeTitle">Character identity</h3>
+            <p data-i18n="showcaseThreeText">Cube heroes, themes, and worlds that stay recognizable.</p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <aside class="hero-card">
-        <img src="assets/images/bounce-cube-icon.png" alt="Bounce Cube Icon" class="game-icon-large">
+    <section class="section featured-game" id="featured-game" aria-labelledby="featured-title">
+      <div class="container featured-layout">
+        <div class="featured-media reveal">
+          <div class="phone-frame">
+            <img src="assets/screenshots/screenshot-2.png" alt="Bounce Cube gameplay screenshot" loading="lazy" data-i18n-alt="previewAlt" />
+          </div>
+          <div class="featured-icon-card">
+            <img src="assets/images/bounce-cube-icon.png" alt="Bounce Cube icon" width="92" height="138" loading="lazy" />
+            <div>
+              <span data-i18n="releasedStatus">Released</span>
+              <strong>Bounce Cube</strong>
+            </div>
+          </div>
+        </div>
 
-        <h2>Bounce Cube</h2>
+        <div class="featured-copy reveal">
+          <p class="eyebrow" data-i18n="featuredEyebrow">Featured Game</p>
+          <h2 id="featured-title">Bounce Cube</h2>
+          <p data-i18n="featuredDescription">
+            A fast-paced endless arcade climber where every jump matters. Collect BC cubes, unlock memorable cube characters, chase achievements, and climb the leaderboards.
+          </p>
 
-        <p data-i18n="heroCardDesc">
-          Jump higher, collect BC cubes, unlock unique characters and beat your best score.
+          <ul class="feature-list">
+            <li data-i18n="featureCharacters">40+ unlockable cube characters</li>
+            <li data-i18n="featureLeaderboards">Google Play leaderboards and achievements</li>
+            <li data-i18n="featureRewards">2X BC rewards and platform themes</li>
+          </ul>
+
+          <div class="latest-update">
+            <span data-i18n="latestLabel">Latest Update</span>
+            <strong data-i18n="latestTitle">Version 1.1 brings Google Play Games, achievements, and global leaderboards.</strong>
+          </div>
+
+          <div class="button-row">
+            <a class="button button-primary" href="#" target="_blank" rel="noopener noreferrer" data-play-link data-i18n="openPlayButton">Open on Google Play</a>
+            <a class="button button-ghost" href="#screenshots" data-i18n="viewGalleryButton">View Gallery</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cube-universe" id="cube-universe" aria-labelledby="universe-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow" data-i18n="universeEyebrow">The Cube Universe</p>
+          <div>
+            <h2 id="universe-title" data-i18n="universeTitle">One studio, multiple worlds in motion.</h2>
+            <p data-i18n="universeIntro">
+              Bounce Cube is the beginning. NexHeart Studio is expanding into new games, new systems, and a broader indie catalog.
+            </p>
+          </div>
+        </div>
+
+        <div class="universe-grid">
+          <article class="universe-card is-released reveal">
+            <div class="universe-visual">
+              <img src="assets/images/bounce-cube-icon.png" alt="" loading="lazy" />
+            </div>
+            <span class="status-badge status-released" data-i18n="releasedStatus">Released</span>
+            <h3>Bounce Cube</h3>
+            <p data-i18n="bounceUniverseText">A skill-based mobile arcade climber and the first public NexHeart release.</p>
+          </article>
+
+          <article class="universe-card is-development reveal">
+            <div class="universe-visual placeholder-visual cafe-visual" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="status-badge status-development" data-i18n="developmentStatus">In Development</span>
+            <h3>Internet Cafe Owner</h3>
+            <p data-i18n="cafeUniverseText">A future indie project exploring management, progression, and cozy tech culture.</p>
+          </article>
+
+          <article class="universe-card is-coming reveal">
+            <div class="universe-visual placeholder-visual future-visual" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="status-badge status-coming" data-i18n="comingStatus">Coming Soon</span>
+            <h3 data-i18n="futureProjectsTitle">Future Projects</h3>
+            <p data-i18n="futureUniverseText">More cube universe games and experimental indie concepts are planned.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section screenshot-section" id="screenshots" aria-labelledby="screenshots-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow" data-i18n="screenshotsEyebrow">Screenshots</p>
+          <div>
+            <h2 id="screenshots-title" data-i18n="screenshotsTitle">A polished mobile arcade world.</h2>
+            <p data-i18n="screenshotsIntro">Tap any screenshot to open the gallery.</p>
+          </div>
+        </div>
+
+        <div class="gallery-grid" data-gallery>
+          <button class="gallery-item reveal" type="button" data-gallery-index="0">
+            <img src="assets/screenshots/screenshot-1.png" alt="Bounce Cube character collection screen" loading="lazy" data-i18n-alt="screenshotOneAlt" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-gallery-index="1">
+            <img src="assets/screenshots/screenshot-2.png" alt="Bounce Cube gameplay screen" loading="lazy" data-i18n-alt="screenshotTwoAlt" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-gallery-index="2">
+            <img src="assets/screenshots/screenshot-3.png" alt="Bounce Cube unlockable heroes screen" loading="lazy" data-i18n-alt="screenshotThreeAlt" />
+          </button>
+          <button class="gallery-item reveal" type="button" data-gallery-index="3">
+            <img src="assets/screenshots/screenshot-4.png" alt="Bounce Cube player stats screen" loading="lazy" data-i18n-alt="screenshotFourAlt" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section roadmap-section" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="container roadmap-layout">
+        <div class="roadmap-copy reveal">
+          <p class="eyebrow" data-i18n="roadmapEyebrow">Roadmap</p>
+          <h2 id="roadmap-title" data-i18n="roadmapTitle">The next phase is bigger than one game.</h2>
+          <p data-i18n="roadmapIntro">NexHeart Studio is growing toward a wider catalog while continuing to refine the cube universe.</p>
+        </div>
+
+        <div class="roadmap-track">
+          <article class="roadmap-item reveal">
+            <span>01</span>
+            <h3 data-i18n="roadmapOneTitle">New updates</h3>
+            <p data-i18n="roadmapOneText">More polish, tuning, and quality-of-life improvements for released games.</p>
+          </article>
+          <article class="roadmap-item reveal">
+            <span>02</span>
+            <h3 data-i18n="roadmapTwoTitle">More cube characters</h3>
+            <p data-i18n="roadmapTwoText">New character ideas, themes, and expressive visual identities.</p>
+          </article>
+          <article class="roadmap-item reveal">
+            <span>03</span>
+            <h3 data-i18n="roadmapThreeTitle">New games</h3>
+            <p data-i18n="roadmapThreeText">Internet Cafe Owner and additional indie projects are part of the long-term plan.</p>
+          </article>
+          <article class="roadmap-item reveal">
+            <span>04</span>
+            <h3 data-i18n="roadmapFourTitle">New platforms</h3>
+            <p data-i18n="roadmapFourText">Future releases may expand beyond the first mobile launch strategy.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="container about-panel reveal">
+        <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
+        <h2 id="about-title" data-i18n="aboutTitle">Indie development with a long memory.</h2>
+        <p data-i18n="aboutText">
+          NexHeart Studio exists to make games that are compact, expressive, and worth returning to. We care about clean feel, visual identity, player progression, and building worlds that can keep expanding.
         </p>
-
-        <div class="stats">
-          <span class="stat">★★★★★ 5.0</span>
-          <span class="stat" data-i18n="statArcade">Arcade</span>
-          <span class="stat">Google Play</span>
-        </div>
-
-        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank" data-i18n="playButton">
-          Get it on Google Play
-        </a>
-      </aside>
+      </div>
     </section>
 
-    <section id="game">
-      <div class="section-title">
-        <h2 data-i18n="featuredTitle">Featured Game</h2>
-        <span data-i18n="featuredSubtitle">Official NexHeart Studio release</span>
-      </div>
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div class="contact-copy reveal">
+          <p class="eyebrow" data-i18n="contactEyebrow">Contact</p>
+          <h2 id="contact-title" data-i18n="contactTitle">Business, support, and privacy.</h2>
+          <p data-i18n="contactText">For studio inquiries, Bounce Cube support, or privacy questions, contact NexHeart Studio directly.</p>
+        </div>
 
-      <div class="featured-game">
-        <img src="assets/images/screenshot-2.png" alt="Bounce Cube Gameplay Screenshot">
-
-        <div>
-          <span class="tag" data-i18n="availableTag">AVAILABLE ON GOOGLE PLAY</span>
-          <h3>Bounce Cube</h3>
-
-          <p data-i18n="featuredDesc">
-            Bounce Cube is a fast-paced endless arcade climber where every jump matters. Collect BC cubes, unlock over 40 unique characters, complete achievements, compete on Google Play leaderboards and push your skills to the limit.
-          </p>
-
-          <div class="actions">
-            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.BusHidoStudio.BounceCube" target="_blank" data-i18n="openPlay">
-              Open on Google Play
-            </a>
-            <a class="btn" href="privacy-policy.html" data-i18n="privacyButton">Privacy Policy</a>
+        <address class="contact-card reveal">
+          <div>
+            <span data-i18n="emailLabel">Email</span>
+            <a href="mailto:nexheart1811@gmail.com" data-email-link>nexheart1811@gmail.com</a>
           </div>
-
-          <div class="update-box">
-            <h4 data-i18n="updateTitle">Latest Update - Version 1.1</h4>
-            <ul>
-              <li data-i18n="update1">Google Play Games integration</li>
-              <li data-i18n="update2">Achievements system</li>
-              <li data-i18n="update3">Global leaderboards</li>
-              <li data-i18n="update4">2X BC reward system</li>
-              <li data-i18n="update5">Platform theme system</li>
-              <li data-i18n="update6">Performance improvements and bug fixes</li>
-            </ul>
+          <div>
+            <span data-i18n="businessLabel">Business</span>
+            <p data-i18n="businessText">Publishing, partnerships, press, and platform conversations.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="screenshots">
-      <div class="section-title">
-        <h2 data-i18n="screensTitle">Game Screenshots</h2>
-        <span data-i18n="screensSubtitle">Bounce Cube on Google Play</span>
-      </div>
-
-      <div class="screenshot-grid">
-        <img src="assets/images/screenshot-1.png" alt="Bounce Cube character collection screenshot">
-        <img src="assets/images/screenshot-2.png" alt="Bounce Cube gameplay screenshot">
-        <img src="assets/images/screenshot-3.png" alt="Bounce Cube unlock heroes screenshot">
-        <img src="assets/images/screenshot-4.png" alt="Bounce Cube stats screenshot">
-      </div>
-    </section>
-
-    <section id="studio">
-      <div class="info-panel">
-        <div>
-          <h2 data-i18n="aboutTitle">About NexHeart Studio</h2>
-          <p data-i18n="aboutDesc">
-            NexHeart Studio is an independent game studio focused on creating high-quality mobile arcade games. We believe great mobile games should be accessible, rewarding and instantly fun.
-          </p>
-        </div>
-
-        <div class="contact-box">
-          <h2 data-i18n="contactTitle">Contact</h2>
-          <p>
-            <span data-i18n="contactDesc">Business inquiries, support requests and privacy questions:</span>
-            <br><br>
-            <a href="mailto:nexheart1811@gmail.com">nexheart1811@gmail.com</a>
-          </p>
-        </div>
+          <div>
+            <span data-i18n="supportLabel">Support</span>
+            <p data-i18n="supportText">Game support, privacy requests, and player feedback.</p>
+          </div>
+        </address>
       </div>
     </section>
   </main>
 
-  <footer>
-    <span data-i18n="footer">© 2026 NexHeart Studio. All rights reserved.</span>
-    <div>
-      <a href="privacy-policy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+  <div class="lightbox" data-lightbox hidden>
+    <div class="lightbox-backdrop" data-lightbox-close></div>
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+      <h2 class="visually-hidden" id="lightbox-title" data-i18n="lightboxTitle">Screenshot preview</h2>
+      <button class="lightbox-close" type="button" data-lightbox-close data-i18n-aria-label="closeLightboxLabel" aria-label="Close screenshot preview"></button>
+      <button class="lightbox-nav lightbox-prev" type="button" data-lightbox-prev data-i18n-aria-label="previousScreenshotLabel" aria-label="Previous screenshot"></button>
+      <img src="assets/screenshots/screenshot-1.png" alt="" data-lightbox-image />
+      <button class="lightbox-nav lightbox-next" type="button" data-lightbox-next data-i18n-aria-label="nextScreenshotLabel" aria-label="Next screenshot"></button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <a class="footer-brand" href="#hero">
+        <img src="assets/icons/favicon.svg" alt="" width="36" height="36" loading="lazy" />
+        <span>NexHeart Studio</span>
+      </a>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#studio-showcase" data-i18n="footerStudio">Studio</a>
+        <a href="#cube-universe" data-i18n="footerUniverse">Universe</a>
+        <a href="#roadmap" data-i18n="footerRoadmap">Roadmap</a>
+        <a href="privacy-policy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+      </nav>
+
+      <div class="footer-social" aria-label="Studio links">
+        <a href="#" target="_blank" rel="noopener noreferrer" data-play-link>Google Play</a>
+        <a href="mailto:nexheart1811@gmail.com" data-email-link data-i18n="footerContact">Contact</a>
+      </div>
+
+      <p data-i18n="footerText">© 2026 NexHeart Studio. All rights reserved.</p>
     </div>
   </footer>
 
-  <script>
-    const translations = {
-      en: {
-        navGame: "Game",
-        navScreenshots: "Screenshots",
-        navStudio: "Studio",
-        navPrivacy: "Privacy",
-        navContact: "Contact",
-        badge: "◆ Indie Mobile Game Studio",
-        heroTitle: 'Games built around skill, <span class="gradient-text">progression</span> and unforgettable cubes.',
-        heroDesc: "NexHeart Studio creates polished arcade experiences focused on satisfying gameplay, rewarding progression and memorable cube characters.",
-        heroButton: "Download on Google Play",
-        screensButton: "View Screenshots",
-        heroCardDesc: "Jump higher, collect BC cubes, unlock unique characters and beat your best score.",
-        statArcade: "Arcade",
-        playButton: "Get it on Google Play",
-        featuredTitle: "Featured Game",
-        featuredSubtitle: "Official NexHeart Studio release",
-        availableTag: "AVAILABLE ON GOOGLE PLAY",
-        featuredDesc: "Bounce Cube is a fast-paced endless arcade climber where every jump matters. Collect BC cubes, unlock over 40 unique characters, complete achievements, compete on Google Play leaderboards and push your skills to the limit.",
-        openPlay: "Open on Google Play",
-        privacyButton: "Privacy Policy",
-        updateTitle: "Latest Update - Version 1.1",
-        update1: "Google Play Games integration",
-        update2: "Achievements system",
-        update3: "Global leaderboards",
-        update4: "2X BC reward system",
-        update5: "Platform theme system",
-        update6: "Performance improvements and bug fixes",
-        screensTitle: "Game Screenshots",
-        screensSubtitle: "Bounce Cube on Google Play",
-        aboutTitle: "About NexHeart Studio",
-        aboutDesc: "NexHeart Studio is an independent game studio focused on creating high-quality mobile arcade games. We believe great mobile games should be accessible, rewarding and instantly fun.",
-        contactTitle: "Contact",
-        contactDesc: "Business inquiries, support requests and privacy questions:",
-        footer: "© 2026 NexHeart Studio. All rights reserved.",
-        footerPrivacy: "Privacy Policy"
-      },
-      tr: {
-        navGame: "Oyun",
-        navScreenshots: "Ekran Görüntüleri",
-        navStudio: "Stüdyo",
-        navPrivacy: "Gizlilik",
-        navContact: "İletişim",
-        badge: "◆ Bağımsız Mobil Oyun Stüdyosu",
-        heroTitle: 'Yetenek, <span class="gradient-text">ilerleme</span> ve unutulmaz küpler üzerine kurulu oyunlar.',
-        heroDesc: "NexHeart Studio; tatmin edici oynanış, ödüllendirici ilerleme ve akılda kalıcı küp karakterler üzerine kurulu mobil arcade deneyimleri geliştirir.",
-        heroButton: "Google Play'den İndir",
-        screensButton: "Ekran Görüntülerini Gör",
-        heroCardDesc: "Daha yükseğe zıpla, BC küplerini topla, benzersiz karakterleri aç ve en yüksek skorunu geç.",
-        statArcade: "Arcade",
-        playButton: "Google Play'de Aç",
-        featuredTitle: "Öne Çıkan Oyun",
-        featuredSubtitle: "Resmi NexHeart Studio oyunu",
-        availableTag: "GOOGLE PLAY'DE YAYINDA",
-        featuredDesc: "Bounce Cube, her zıplamanın önemli olduğu hızlı tempolu sonsuz bir arcade tırmanış oyunudur. BC küplerini topla, 40'tan fazla benzersiz karakterin kilidini aç, başarımları tamamla, Google Play liderlik tablolarında yarış ve en yüksek skorunu zorla.",
-        openPlay: "Google Play'de Aç",
-        privacyButton: "Gizlilik Politikası",
-        updateTitle: "Son Güncelleme - Sürüm 1.1",
-        update1: "Google Play Games entegrasyonu",
-        update2: "Başarım sistemi",
-        update3: "Global liderlik tabloları",
-        update4: "2X BC ödül sistemi",
-        update5: "Platform tema sistemi",
-        update6: "Performans iyileştirmeleri ve hata düzeltmeleri",
-        screensTitle: "Oyun Ekran Görüntüleri",
-        screensSubtitle: "Google Play'de Bounce Cube",
-        aboutTitle: "NexHeart Studio Hakkında",
-        aboutDesc: "NexHeart Studio, yüksek kaliteli mobil arcade oyunları geliştirmeye odaklanan bağımsız bir oyun stüdyosudur. İyi bir mobil oyunun erişilebilir, ödüllendirici ve ilk dokunuştan itibaren eğlenceli olması gerektiğine inanıyoruz.",
-        contactTitle: "İletişim",
-        contactDesc: "İş birlikleri, destek talepleri ve gizlilik soruları:",
-        footer: "© 2026 NexHeart Studio. Tüm hakları saklıdır.",
-        footerPrivacy: "Gizlilik Politikası"
-      }
-    };
-
-    function setLang(lang) {
-      const dictionary = translations[lang];
-
-      document.documentElement.lang = lang;
-      localStorage.setItem("nexheart-lang", lang);
-
-      document.querySelectorAll("[data-i18n]").forEach((element) => {
-        const key = element.getAttribute("data-i18n");
-        if (dictionary[key]) {
-          element.textContent = dictionary[key];
-        }
-      });
-
-      document.querySelectorAll("[data-i18n-html]").forEach((element) => {
-        const key = element.getAttribute("data-i18n-html");
-        if (dictionary[key]) {
-          element.innerHTML = dictionary[key];
-        }
-      });
-
-      document.getElementById("lang-en").classList.toggle("active", lang === "en");
-      document.getElementById("lang-tr").classList.toggle("active", lang === "tr");
-    }
-
-    setLang(localStorage.getItem("nexheart-lang") || "en");
-  </script>
+  <script src="js/games.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/parallax.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/gallery.js" defer></script>
+  <script src="js/app.js" defer></script>
 </body>
 </html>
