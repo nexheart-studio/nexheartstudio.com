@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NexHeart Studio">
+  <rect width="64" height="64" rx="12" fill="#05060d"/>
+  <path d="M18 14h28l8 8v28H18L10 42V14h8Z" fill="#63e8ff" opacity=".95"/>
+  <path d="M18 14h28l8 8H26l-8-8Z" fill="#ffd36a" opacity=".88"/>
+  <path d="M18 14v36l-8-8V14h8Z" fill="#ff5b9e" opacity=".72"/>
+  <path d="M25 25h14v14H25z" fill="#05060d" opacity=".55"/>
+  <path d="M30 30h4v4h-4z" fill="#f7fbff" opacity=".72"/>
+</svg>
